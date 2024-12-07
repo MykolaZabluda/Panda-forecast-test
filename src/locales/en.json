@@ -1,0 +1,9 @@
+{
+  "general": {
+    "header-title": "Panda Forecast",
+    "header-all-btn": "All Cards",
+    "header-select-btn": "Selected Cards",
+    "title": "Title",
+    "input-placeholder": "Search for a city"
+  }
+}

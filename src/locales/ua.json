@@ -1,0 +1,9 @@
+{
+  "general": {
+    "header-title": "Panda Прогноз погоди",
+    "header-all-btn": "Всі картки",
+    "header-select-btn": "Вибрані картки",
+    "title": "Заголовок",
+    "input-placeholder": "Пошук міста"
+  }
+}
