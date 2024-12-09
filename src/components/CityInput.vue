@@ -2,6 +2,7 @@
   <div>
     <input
         type="text"
+        class="search-input"
         v-model="query"
         @input="onInput"
         @keydown.enter="selectFirstSuggestion"

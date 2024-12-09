@@ -6,34 +6,48 @@
           v-for="(city, index) in cities"
           :key="city.lat + city.lon"
           :city="city"
-          @close="removeCity(index)"
+          @close="confirmRemoveCity(city, index)"
           @add-to-favorites="addFavorite"
+          @show-temperature-graph="showTemperatureGraph"
       />
     </div>
+
     <div v-if="showLimitModal" class="modal">
       <div class="modal-content">
         <p>You have reached the limit of displaying cities. To add a new city, please remove at least one card.</p>
-        <button @click="showLimitModal = false">Close</button>
+        <button class="button button-cancel" @click="showLimitModal = false">Close</button>
       </div>
     </div>
+
     <div v-if="showConfirmModal" class="modal">
       <div class="modal-content">
         <p>Are you sure you want to remove the city {{ cityToRemove.name }} from the list?</p>
-        <button @click="removeCity">Yes</button>
-        <button @click="cancelRemoveCity">No</button>
+        <button class="button button-apply" @click="removeCity">Yes</button>
+        <button class="button button-cancel" @click="cancelRemoveCity">No</button>
       </div>
     </div>
+
+    <ChartModal
+        v-if="showChartModal"
+        :city="selectedCity"
+        @close="showChartModal = false"
+    />
   </div>
 </template>
 
 <script>
 import CityInput from "@/components/CityInput.vue";
 import WeatherCard from "@/components/WeatherCard.vue";
+import ChartModal from "@/components/GraphModal.vue";
 import axios from "axios";
 
 export default {
-  name: "WeatherDashboard",
-  components: { CityInput, WeatherCard },
+  name: "HomeView",
+  components: {
+    ChartModal,
+    CityInput,
+    WeatherCard,
+  },
   data() {
     return {
       cities: [],
@@ -41,6 +55,8 @@ export default {
       showConfirmModal: false,
       cityToRemove: null,
       cityToRemoveIndex: null,
+      showChartModal: false,
+      selectedCity: null,
     };
   },
   created() {
@@ -84,17 +100,17 @@ export default {
         this.showConfirmModal = false;
       }
     },
-    addFavorite(city) {
-      if (this.$refs.favoriteCards) {
-        this.$refs.favoriteCards.addFavorite(city);
-      } else {
-        console.error("FavoriteCards component is not available.");
-      }
-    },
     cancelRemoveCity() {
       this.cityToRemove = null;
       this.cityToRemoveIndex = null;
       this.showConfirmModal = false;
+    },
+    addFavorite(city) {
+      console.log("Favorite city added:", city);
+    },
+    showTemperatureGraph(city) {
+      this.selectedCity = city;
+      this.showChartModal = true;
     },
   },
 };
@@ -106,23 +122,7 @@ export default {
   flex-wrap: wrap;
   gap: 1rem;
 }
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.modal-content {
-  background: white;
-  padding: 1rem;
-  border-radius: 5px;
-  text-align: center;
-}
+
 button {
   margin: 0.5rem;
 }

@@ -44,3 +44,67 @@
 .min-w {
   max-width: 360px;
 }
+
+.text-space {
+  margin: 5px 0;
+}
+
+.nav-button {
+  text-decoration: none;
+  font-size: 18px;
+  color: #fff;
+  font-weight: 700;
+  margin: 0 10px;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &-content {
+    background: white;
+    padding: 1rem;
+    border-radius: 5px;
+    text-align: center;
+    max-width: 95vh;
+    max-height: 90vh;
+    width: 100%;
+  }
+}
+
+.button {
+  padding: 5px 7px;
+  border-radius: 50px;
+  border: 1px solid #a47764;
+  margin: 0 5px;
+
+  &-apply {
+    color: #a47764;
+  }
+
+  &-cancel {
+    border-color: darkred;
+    color: darkred;
+  }
+
+  &-more {
+    border-color: #42b983;
+    color: #42b983;
+  }
+}
+
+.search-input {
+  width: auto;
+  max-width: 200px;
+  padding: 5px 7px;
+  border-radius: 50px;
+  border: 1px solid;
+  margin: 15px 0 30px 0;
+}
